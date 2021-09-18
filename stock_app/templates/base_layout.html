@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>{% block title %}Stock Quote App{% endblock %} - StockApp</title>
+        <meta name="viewport" content="width=device-width", initial-scale=1, shrink-to-fit=no">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+                <a href="{{ url_for('home.home_page') }}" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                    Stock App
+                </a>
+        
+              <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="{{ url_for('home.home_page') }}" class="nav-link px-2 {% if request.url_rule.endpoint == 'home.home_page' %} link-secondary {% else %} link-dark {% endif %}">Home</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">Features</a></li>
+                <li><a href="#" class="nav-link px-2 link-dark">Pricing</a></li>
+              </ul>
+        
+              <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-outline-primary me-2">Login</button>
+                <button type="button" class="btn btn-primary">Sign-up</button>
+              </div>
+            </header>
+        </div>
+        <div class="container mt-4">
+            <form class="form-inline" method="POST" action="{{ url_for('home.search') }}">
+                <div class="row g-3">
+                    <div class="col">
+                        <input class="form-control mr-sm-2" type="input" name="ticker" placeholder="AAPL" aria-label="Search" />
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>

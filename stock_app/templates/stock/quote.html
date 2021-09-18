@@ -1,0 +1,15 @@
+{% extends "base_layout.html" %}
+{% block title %} {{ ticker }} Stock Price {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm">
+        <h1 class="mb-3">{{ ticker | upper }}</h1>
+        <hr />
+        <p>This is the stock price: ${{ price | round(2, 'floor') }}</p>
+    </div>
+    <div class="col">
+        {% include "/shared/portfolio.html" %}
+    </div>
+</div>
+{% endblock %}

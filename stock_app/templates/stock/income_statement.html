@@ -1,0 +1,41 @@
+{% extends "base_layout.html" %}
+{% block title %} {{ ticker }} Income Statement {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm">
+        <img src="https://quickchart.io/chart?width=300&height=200&c={{ chart_params }}"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm">
+        <h1 class="mb-3">Income Statement: {{ ticker | upper }}</h1>
+        <hr />
+        <table class="table mt-4 table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Revenue</th>
+                    <th scope="col">Gross Profit</th>
+                    <th scope="col">Gross Profit Ratio</th>
+                    <th scope="col">EPS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fy in income_statement %}
+                <tr>
+                    <td>{{ fy['date'] }}</td>
+                    <td>{{ "${:,}".format(fy['revenue']) }}</td>
+                    <td>{{ "${:,}".format(fy['grossProfit']) }}</td>
+                    <td>{{ fy['grossProfitRatio'] | round(3, 'floor') }}</td>
+                    <td>{{ fy['eps'] | round(3, 'floor') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col">
+        {% include "/shared/portfolio.html" %}
+    </div>
+</div>
+{% endblock %}
